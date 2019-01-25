@@ -10,11 +10,13 @@
   </head>
 
   <body>
-    <% flash.each do |name, msg| %>
-    <ul>
-      <li><%= msg %></li>
-    </ul>
-    <% end  %>
+  <!-- to make sure that our code is clean this code for flash messages above "yield" has been moved to a partial named _messages.html.erb
+  located in views/layouts/ and has been replaced with the render reference.
+  (link for more on partials https://guides.rubyonrails.org/layouts_and_rendering.html)  -->
+    
+    <%= render 'layouts/messages' %>
+
+    
     <%= yield %>
   </body>
 </html>

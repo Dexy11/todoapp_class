@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+    before_action :set_todo, only: [:edit, :update, :show, :destroy]
+
     def new
         @todo = Todo.new()
     end
@@ -16,7 +18,6 @@ class TodosController < ApplicationController
     end
 
     def show
-        @todo = Todo.find(params[:id])
     end
 
     def index
@@ -24,12 +25,11 @@ class TodosController < ApplicationController
     end
 
     def edit
-        @todo = Todo.find(params[:id]) # since edit route=> /todos/:id/edit : this line fetch the record with id matching the one in the link
+       # @todo = Todo.find(params[:id]) # since edit route=> /todos/:id/edit : this line fetch the record with id matching the one in the link
        # @todo.update(todo_params)
     end
 
     def update
-        @todo = Todo.find(params[:id])
         if @todo.update(todo_params)
             flash[:notice] ="Todo updated successfully!"
             redirect_to todo_path(@todo)
@@ -39,13 +39,25 @@ class TodosController < ApplicationController
     end
 
     def destroy
-        @todo = Todo.find(params[:id])
         @todo.destroy
         flash[:notice]  = "Todo Deleted successfully"
         redirect_to todos_path
     end
     
     private
+
+    #refactoring: cleaning our codes by puting together all the repeating sections
+    # in this case the repeating section in this todos_controller is
+    # @todo = Todo.find(params[:id]) so we will put it in a private method set_todo
+    # and at the beginning we will tel rails to run set_todo method before any action for
+    #for the methods of edit, show, update and destroy because were the ones using @todo=Todo.find(params[:id])
+
+    def set_todo
+        @todo = Todo.find(params[:id])
+    end
+    
+
+
     def todo_params
         params.require(:todo).permit(:name, :description, :time)
     end

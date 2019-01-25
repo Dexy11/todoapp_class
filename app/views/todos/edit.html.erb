@@ -1,37 +1,6 @@
 <h2>Edit and existing todo</h2>
 
-<!-- check if any errors has occured when trying to edit a todo -->
-<% if @todo.errors.any? %>   
+<!-- since the forms for edit and new are the same! they have been moved to a partial -form.html.erb 
+located in views/todos -->
 
-<h3>Todo was not created check the following</h3>
-
-<ul>
-   <% @todo.each do |msg| %> <!-- loop through all the errors and display them -->
-      <li><%= msg %></li>
-   <% end %>
-</ul>
-<% end %>
-
-<!-- form for editing a new todo: created using form_helpers -->
-
-<%= form_for @todo do |f| %>
-   <p>
-        <%= f.label :name, "Name" %><br>
-        <%= f.text_field :name %>
-   </p>
-
-   <p>
-    <%= f.label :description, "Description" %><br>
-    <%= f.text_area :description %>
-   </p>
-
-   <p>
-   <%= f.label :time, "Time" %><br>
-    <%= f.text_field :time %>
-   </p>
-
-   <p>
-   <%= f.submit "Update Todo"%>
-   </p>
-    
-<% end %>
+<%= render 'form' %>
