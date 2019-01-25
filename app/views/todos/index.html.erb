@@ -1,15 +1,24 @@
 <h2>All the todos</h2>
+<p>
+    <%= link_to "Create a Todo", new_todo_path %> <!-- link for creating a new todo  | new_todo_path => todos#new -->
+    <!-- more on link helpers can be found  on https://guides.rubyonrails.org/routing.html -->
+</p>
+
 
 <table>
 <tr>
     <th>Name</th>
     <th>Description</th>
     <th>Time</th>
+    <th colspan=2>Actions</th>
 </tr>
 <% @todos.each do |todo| %>
     <tr>
         <td><%= todo.name %></td>
         <td><%= todo.description %></td>
         <td><%= todo.time %></td>
+        <td><%= link_to "Edit", edit_todo_path(todo) %></td> <!-- creating link for editing every todo -->
+        <td><%= link_to "show", todo_path(todo) %></td> <!-- creating link for displaying every todo -->
     </tr>   
 <% end %>
+<table>
