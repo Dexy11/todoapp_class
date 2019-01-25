@@ -1,26 +1,38 @@
 <h2>Create a new Todo</h2>
 
+<!-- check if any errors has occured when trying to create a todo -->
+<% if @todo.errors.any? %>   
+
+<h3>Todo was not created check the following</h3>
+
+<ul>
+   <% @todo.each do |msg| %> <!-- loop through all the errors and display them -->
+      <li><%= msg %></li>
+   <% end %>
+</ul>
+<% end %>
+
+<!-- form for creating a new todo: created using form_helpers -->
 <%= form_for @todo do |f| %>
    <p>
-        <%= f.label :name, "Name" %><br>
-        <%= f.text_field :name %>
+      <%= f.label :name, "Name" %><br>
+      <%= f.text_field :name %>
    </p>
 
    <p>
-    <%= f.label :description, "Description" %><br>
-    <%= f.text_area :description %>
+      <%= f.label :description, "Description" %><br>
+      <%= f.text_area :description %>
    </p>
 
    <p>
-   <%= f.label :time, "Time" %><br>
-    <%= f.text_field :time %>
+      <%= f.label :time, "Time" %><br>
+      <%= f.text_field :time %>
    </p>
 
    <p>
-   <%= f.submit "Create Todo"%>
+      <%= f.submit "Create Todo"%>
    </p>
     
 <% end %>
 
-<p>
-</p>
+ 
