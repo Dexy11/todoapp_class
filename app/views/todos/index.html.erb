@@ -18,7 +18,9 @@
         <td><%= todo.description %></td>
         <td><%= todo.time %></td>
         <td><%= link_to "Edit", edit_todo_path(todo) %></td> <!-- creating link for editing every todo -->
-        <td><%= link_to "show", todo_path(todo) %></td> <!-- creating link for displaying every todo -->
+        <td><%= link_to "Show", todo_path(todo) %></td> <!-- creating link for displaying every todo -->
+        <td><%= link_to "Delete", todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' } %></td> <!-- creating link for 
+        delete but since delete has the same path as show we need to specify the method and a confirmation message before deleting  -->
     </tr>   
 <% end %>
 <table>
